@@ -30,6 +30,18 @@
             </div>
 
             <div class="mb-3 input-group">
+                <label for="type_id" class="input-group-text">Type</label>
+                <select class="form-select" type="text" name="type_id" id="type_id">
+                    @foreach ($types as $type )
+                        <option value="{{ $type->id }}"
+                            {{ $type->id == old('type_id', $project->category_id) ? 'selected' : '' }}> {{ $type->name }}
+                        </option>
+                        
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3 input-group">
                 <label for="date" class="input-group-text">Date:</label>
                 <input class="form-control" type="date" name="date" id="date" value="{{ old('date', $project->date) }}">
             </div>

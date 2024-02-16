@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -12,6 +13,7 @@ class ProjectController extends Controller
     private $rules = [
         'name_project'=>['required', 'min:3', 'max:255'],
         'author'=>['required', 'min:3', 'max:255'],
+        'type_id'=>['exists:types, id'],
         'image'=>['required', 'url:https'],
         'date'=>['required', 'date'],
         'linguaggio_usato'=>['required', 'min:3', 'max:255'],
@@ -32,7 +34,8 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
-        return view('admin.projects.create', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.create', compact('project', 'types'));
     }
 
     /**
@@ -59,7 +62,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
