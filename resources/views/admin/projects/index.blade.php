@@ -28,6 +28,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome Progetto</th>
                     <th scope="col">Autore</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Data</th>
                 </tr>
             </thead>
@@ -42,6 +43,9 @@
                         </td>
                         <td>
                             {{ $project->author }}
+                        </td>
+                        <td>
+                            {{ $project->type->name }}
                         </td>
                         <td>
                             {{ $project->date }}

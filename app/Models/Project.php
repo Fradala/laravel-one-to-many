@@ -11,11 +11,17 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
 
+
     protected $fillable = [
         'name_project',
         'author',
+        'type_id',
         'image',
         'date',
         'linguaggio_usato',
     ];
+
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
 }
