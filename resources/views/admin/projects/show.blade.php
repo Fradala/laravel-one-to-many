@@ -27,6 +27,9 @@
             {{ $project->author }}
         </p>
         <p>
+            {{ $project->id }} -- Type: {{ $project->type->name }}
+        </p>
+        <p>
             {{ $project->linguaggio_usato }}
         </p>
         <p>

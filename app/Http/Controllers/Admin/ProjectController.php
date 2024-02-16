@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -13,11 +14,13 @@ class ProjectController extends Controller
     private $rules = [
         'name_project'=>['required', 'min:3', 'max:255'],
         'author'=>['required', 'min:3', 'max:255'],
-        'type_id'=>['exists:types, id'],
+        'type_id'=>['exists:types,id'],
         'image'=>['required', 'url:https'],
         'date'=>['required', 'date'],
         'linguaggio_usato'=>['required', 'min:3', 'max:255'],
     ];
+
+    
 
     /**
      * Display a listing of the resource.
@@ -35,6 +38,7 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $types = Type::all();
+        
         return view('admin.projects.create', compact('project', 'types'));
     }
 
@@ -44,6 +48,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate($this->rules);
+        $rules['type_id'] =Auth::id();
         $project = Project::create($data);
 
         return redirect()->route('admin.projects.show', $project);
